@@ -154,6 +154,11 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
+        .alert.warning {
+            background-color: #fffbeb;
+            border-left-color: #f59e0b;
+        }
+
         /* Controls */
         .controls {
             position: fixed;
@@ -238,7 +243,7 @@
                     </ul>
                     
                     <div class="alert">
-                        <strong>💡 Častý omyl:</strong> Git samotný <strong>NENÍ</strong> bugtrackingový systém. GitHub je platforma, která používá Git pro verzování, ale navíc k němu přidává vlastní bugtracking (záložka Issues) a další nástroje.
+                        Git samotný <strong>NENÍ</strong> bugtrackingový systém. GitHub je platforma, která používá Git pro verzování, ale navíc k němu přidává vlastní bugtracking (záložka Issues) a další nástroje.
                     </div>
                 </div>
             </div>
@@ -331,18 +336,39 @@
             <!-- Slide 7 -->
             <div class="slide">
                 <div class="slide-content">
-                    <h1>7. Samostatné cvičení</h1>
-                    <p>Vzhledem k mé nepřítomnosti máte na dnešní hodinu samostatný praktický úkol. Budete navazovat na minulou hodinu.</p>
+                    <h1>7. Bezpečnost a první odeslání</h1>
+                    <p>Možná si říkáte: <em>"Když si může kdokoliv přes <code>git clone</code> naklonovat můj veřejný repozitář, nemůže mi tam někdo cizí přepsat můj kód a všechno mi zničit?"</em></p>
+                    
+                    <h2>Váš kód je v naprostém bezpečí</h2>
+                    <ul>
+                        <li><strong>Čtení je veřejné:</strong> Kdokoliv se může z vašeho kódu učit, stáhnout si ho k sobě a upravovat si ho <strong>u sebe v počítači</strong>.</li>
+                        <li><strong>Zápis je chráněný:</strong> K odeslání změn zpět na GitHub (přes <code>git push</code>) musí mít člověk administrátorská práva – musí být majitelem nebo pozvaným spolupracovníkem.</li>
+                    </ul>
+
+                    <div class="alert warning">
+                        <strong>⚠️ Co se stane v praxi:</strong> Až za chvíli ve VS Code poprvé napíšete <code>git push</code>, terminál vás zastaví. Vyskočí na vás <strong>okno s výzvou k přihlášení</strong>, které vás přesměruje do prohlížeče, abyste potvrdili svá oprávnění. Teprve po úspěšném přihlášení GitHub vaši změnu přijme!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h1>8. Samostatné cvičení</h1>
+            
                     
                     <h2>Váš dnešní úkol:</h2>
                     <ol>
                         <li>Otevřete si na počítači terminál (nebo terminál přímo ve VS Code).</li>
-                        <li>Stáhněte si svůj minulý web z GitHubu do PC příkazem:<br> <span class="highlight">git clone https://repozitar.cz/</span></li>
+                        <li>Stáhněte si svůj minulý web z GitHubu do PC příkazem:<br> 
+                            <span class="highlight">git clone https://github.com/vase-jmeno/nazev-repozitare.git</span><br>
+                            <span style="display: block; margin-top: 10px; font-size: 0.95em; color: #d9381e;"><strong>⚠️ POZOR:</strong> Musíte použít adresu repozitáře (obsahuje github.com), nikoliv adresu vašeho hotového webu (která končí na github.io). Jinak vám terminál ohlásí chybu <em>"fatal: repository not found"</em>!</span>
+                        </li>
                         <li>Otevřete staženou složku ve VS Code a proveďte viditelnou změnu ve vašem <code>index.html</code> nebo CSS.</li>
                         <li>Otevřete terminál ve VS Code (musíte být uvnitř složky!) a připravte soubory: <span class="highlight">git add .</span></li>
                         <li>Uložte změnu do historie: <span class="highlight">git commit -m "Aktualizace webu z lokálu"</span></li>
-                        <li>Odešlete to na GitHub: <span class="highlight">git push</span></li>
-                        <li>Zkontrolujte svůj veřejný GitHub Pages web. Za pár minut by se měla úprava projevit!</li>
+                        <li>Odešlete to na GitHub: <span class="highlight">git push</span> (Zde na vás pravděpodobně vyskočí vysvětlované přihlašovací okno).</li>
+                        <li>Zkontrolujte svůj veřejný GitHub Pages web. Za pár minut by se měla úprava projevit.</li>
                     </ol>
                 </div>
             </div>
@@ -356,7 +382,7 @@
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
             Předchozí
         </button>
-        <div class="counter" id="counter">1 / 7</div>
+        <div class="counter" id="counter">1 / 8</div>
         <button id="nextBtn" onclick="changeSlide(1)">
             Další
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -371,6 +397,7 @@
         const counter = document.getElementById('counter');
         const progressBar = document.getElementById('progressBar');
 
+        // JS kód automaticky spočítá, že je nyní 8 slajdů
         function updateSlider() {
             // Remove active class from all
             slides.forEach(slide => {
@@ -397,7 +424,6 @@
 
         function changeSlide(direction) {
             if (currentSlide === slides.length - 1 && direction === 1) {
-                // Clicking finish on the last slide
                 return;
             }
             
